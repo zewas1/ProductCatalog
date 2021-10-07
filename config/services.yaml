@@ -23,3 +23,13 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    repository.product_repository:
+        class: Repository\ProductRepository
+        arguments:
+            - '@services.doctrine.entity_manager.default'
+
+    service.product_save_handler:
+        class: Services\ProductSaveHandler
+        arguments:
+            - 'repository.product_repository'
