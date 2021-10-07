@@ -9,20 +9,60 @@ use App\Form\ProductType;
 use App\Model\ProductModel;
 use ProductSaveHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PropertyInfo\Extractor\PhpDocExtractor;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Encoder\XmlEncoder;
+use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 class ProductController extends AbstractController
 {
 
-    #[Route('/api/product/list', name: 'app_list', methods: 'GET')]
+    /**
+     * @return Response
+     */
+    #[Route('/product/list', name: 'app_product_list', methods: 'GET')]
     public function list(): Response
     {
+        $products = $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->findAll();
+
+        if (!$products) {
+            throw $this->createNotFoundException(
+                'No products found'
+            );
+        }
+
         return $this->render('product/index.html.twig', [
-            'controller_name' => 'ProductController',
+            'products' => $products,
         ]);
+    }
+
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
+    #[Route('/api/items/{id}', methods: 'GET')]
+    public function show(int $id): JsonResponse
+    {
+        $product = $this->getDoctrine()
+            ->getRepository(Product::class)
+            ->find($id);
+
+        if (!$product) {
+            throw $this->createNotFoundException(
+                'No product found'
+            );
+        }
+
+        return $this->json($product);
     }
 
     #[Route('/api/product', methods: 'POST')]
@@ -61,7 +101,7 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->uploadToDb($product);
 
-            return $this->redirectToRoute('app_list');
+            return $this->redirectToRoute('app_product_list');
         }
 
         return $this->render('product/productForm.html.twig', [
@@ -86,7 +126,7 @@ class ProductController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->uploadToDb($productCategory);
 
-            return $this->redirectToRoute('app_list');
+            return $this->redirectToRoute('app_product_list');
         }
 
         return $this->render('product/productCategoryForm.html.twig', [

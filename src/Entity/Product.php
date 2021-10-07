@@ -5,11 +5,12 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
-class Product
+class Product implements \JsonSerializable
 {
     /**
      * @ORM\Id
@@ -23,6 +24,8 @@ class Product
     /**
      * @ORM\Column(name="name", type="string", length=255)
      *
+     * @Assert\NotBlank(message="Name must not be blank")
+     *
      * @var string|null
      */
     private ?string $name;
@@ -31,12 +34,16 @@ class Product
      * @ORM\ManyToOne(targetEntity=ProductCategory::class)
      * @ORM\JoinColumn(nullable=false)
      *
+     * @Assert\Valid()
+     *
      * @var ProductCategory
      */
     private ProductCategory $productCategory;
 
     /**
      * @ORM\Column(name="price", type="decimal", precision=10, scale=2)
+     *
+     * @Assert\NotBlank(message="Price must not be blank")
      *
      * @var float
      */
@@ -93,7 +100,7 @@ class Product
      * @param ProductCategory $productCategory
      * @return $this
      */
-    public function setProductCategory (ProductCategory $productCategory): self
+    public function setProductCategory(ProductCategory $productCategory): self
     {
         $this->productCategory = $productCategory;
 
@@ -149,5 +156,23 @@ class Product
     public function setQuantity(int $quantity): void
     {
         $this->quantity = $quantity;
+    }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize(): array
+    {
+        return [
+            'id' => $this->id,
+            'product' => $this->name,
+            'productCategory' => [
+                'id' => $this->productCategory->getId(),
+                'name' => $this->productCategory->getName(),
+            ],
+            'price' => $this->price,
+            'quantity' => $this->quantity,
+            'description' => $this->description,
+        ];
     }
 }

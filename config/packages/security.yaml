@@ -1,4 +1,7 @@
 security:
+
+  access_control:
+    - { path: ^/product, roles: ROLE_USER }
   encoders:
     App\Entity\User:
       algorithm: auto

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ProductCategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=ProductCategoryRepository::class)
@@ -19,6 +20,8 @@ class ProductCategory
 
     /**
      * @ORM\Column(type="string", length=255)
+     *
+     * @Assert\NotBlank (message="Category must not be empty")
      */
     private ?string $name;
 
