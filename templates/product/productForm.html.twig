@@ -1,5 +1,11 @@
-{# templates/registration/index.html.twig #} {% extends 'base.html.twig' %} {%
-    block body %}
+{# templates/registration/index.html.twig #} {% extends 'base.html.twig' %} {% block body %}
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-bg mb-5">
+        <a style="margin-left: 75px;color: #000080;" class="navbar-brand space-brand" href="{{ path('app_product_list') }}">Product list</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </nav>
     <div class="container">
         <div class="row">
             <div class="col-md-10 ml-md-auto">

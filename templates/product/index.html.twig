@@ -1,20 +1,75 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}Hello ProductController!{% endblock %}
-
+{# templates/list/index.html.twig #} {% extends 'base.html.twig' %}
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <nav class="navbar navbar-expand-lg navbar-dark navbar-bg mb-5">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a style="margin-left:150px;color: #000080;" class="nav-link" href="{{ path('app_product') }}">Create
+                        product</a>
+                </li>
+                <li class="nav-item">
+                    <a style="margin-right:150px;color: #000080;" class="nav-link"
+                       href="{{ path('app_product_category') }}">Create category</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card bg-light mb-3 mt-3">
+                    <div class="card-body">
+                        <div class="card-header">List products</div>
+                        <AmpContent>
+                            <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by category">
+                            <table id="myTable" class="table">
+                                <tr>
+                                    <th>id</th>
+                                    <th>Name</th>
+                                    <th>Category</th>
+                                    <th>Price</th>
+                                    <th>Quantity</th>
+                                    <th>Description</th>
+                                </tr>
+                                {% for product in products|filter(product=>product.name) %}
+                                    <tr>
+                                        <td>{{ product.id }}</td>
+                                        <td>{{ product.name }}</td>
+                                        <td>{{ product.productCategory.name }}</td>
+                                        <td>{{ product.price }}</td>
+                                        <td>{{ product.quantity }}</td>
+                                        <td>{{ product.description }}</td>
+                                    </tr>
+                                {% endfor %}
+                            </table>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+                        </AmpContent>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xamp/htdocs/agmis2/src/Controller/ProductController.php'|file_link(0) }}">src/Controller/ProductController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xamp/htdocs/agmis2/templates/product/index.html.twig'|file_link(0) }}">templates/product/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <script>
+        function myFunction() {
+            var input, filter, table, tr, mainColumn, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                mainColumn = tr[i].getElementsByTagName("td")[2];
+                if (mainColumn) {
+                    txtValue = mainColumn.textContent || mainColumn.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
 {% endblock %}

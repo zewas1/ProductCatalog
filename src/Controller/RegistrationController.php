@@ -27,7 +27,7 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/registration", name="registration")
+     * @Route("/registration", name="app_register")
      *
      * @param Request $request
      * @return RedirectResponse|Response

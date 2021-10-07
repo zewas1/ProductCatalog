@@ -24,11 +24,11 @@ class ProductType extends AbstractType
             ->add('description')
             ->add('productCategory', EntityType::class, [
                 'class' => ProductCategory::class,
-                'choice_label' => function(ProductCategory $productCategory) {
+                'choice_label' => function (ProductCategory $productCategory) {
                     return $productCategory->getName();
                 },
                 'placeholder' => 'Choose product category'
-        ]);
+            ]);
     }
 
     /**
