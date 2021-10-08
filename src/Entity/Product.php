@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -19,7 +20,7 @@ class Product implements \JsonSerializable
      *
      * @var int
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(name="name", type="string", length=255)

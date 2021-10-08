@@ -1,12 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f7492a67-2561-4897-9c72-d84cccb75e85" name="Changes" comment="cleanup">
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/productcatalog.zip" afterDir="false" />
+    <list default="true" id="f7492a67-2561-4897-9c72-d84cccb75e85" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/services.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/services.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/ProductCategory.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/ProductCategory.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Form/ProductCategoryType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Form/ProductCategoryType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/ProductCategoryModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/ProductCategoryModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/ProductModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/ProductModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/registration/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/registration/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,7 +229,8 @@
       <workItem from="1633588202334" duration="1341000" />
       <workItem from="1633589571842" duration="559000" />
       <workItem from="1633590164171" duration="44149000" />
-      <workItem from="1633643412629" duration="1711000" />
+      <workItem from="1633643412629" duration="2096000" />
+      <workItem from="1633669107687" duration="2436000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1633605504268</created>
@@ -246,7 +253,14 @@
       <option name="project" value="LOCAL" />
       <updated>1633641967281</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="cleanup">
+      <created>1633645440944</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1633645440944</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,17 +271,7 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="product and category creation logic" />
     <MESSAGE value="product api, security update, list, validators" />
-    <option name="LAST_COMMIT_MESSAGE" value="product api, security update, list, validators" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/src/Controller/ProductController.php</url>
-          <line>26</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="cleanup" />
   </component>
 </project>

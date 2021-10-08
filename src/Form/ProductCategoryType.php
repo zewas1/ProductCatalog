@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ProductCategoryType extends AbstractType implements \JsonSerializable
+class ProductCategoryType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -27,10 +27,5 @@ class ProductCategoryType extends AbstractType implements \JsonSerializable
         $resolver->setDefaults([
             'data_class' => ProductCategory::class,
         ]);
-    }
-
-    public function jsonSerialize()
-    {
-        return get_object_vars($this);
     }
 }

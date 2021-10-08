@@ -6,8 +6,6 @@ use App\Entity\Product;
 use App\Entity\ProductCategory;
 use App\Form\ProductCategoryType;
 use App\Form\ProductType;
-use App\Model\ProductModel;
-use ProductSaveHandler;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -21,7 +19,7 @@ class ProductController extends AbstractController
     /**
      * @return Response
      */
-    #[Route('/product/list', name: 'app_product_list', methods: 'GET')]
+    #[Route('/products', name: 'app_product_list', methods: 'GET')]
     public function list(): Response
     {
         $products = $this->getDoctrine()
@@ -59,32 +57,13 @@ class ProductController extends AbstractController
         return $this->json($product);
     }
 
-    #[Route('/api/product', methods: 'POST')]
     /**
-     * @param ProductModel $productModel
-     * @param ProductSaveHandler $productSaveHandler
-     * @return ProductModel
-     */
-    public function createProduct(ProductModel $productModel, ProductSaveHandler $productSaveHandler): ProductModel
-    {
-        $entityManager = $this->getDoctrine()->getManager();
-
-        $entity = $productSaveHandler->buildProduct($productModel);
-
-        $entityManager->persist($entity);
-        $entityManager->flush();
-
-        return $productModel;
-    }
-
-
-    /**
-     * @Route("/product", name="app_product")
+     * @Route("/products/create", name="app_product")
      *
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function productController(Request $request): RedirectResponse|Response
+    public function createProduct(Request $request): RedirectResponse|Response
     {
         $product = new Product();
 
@@ -104,12 +83,12 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/product/category", name="app_product_category")
+     * @Route("/products/category", name="app_product_category")
      *
      * @param Request $request
      * @return RedirectResponse|Response
      */
-    public function productCategoryController(Request $request): RedirectResponse|Response
+    public function createProductCategory(Request $request): RedirectResponse|Response
     {
         $productCategory = new ProductCategory();
 
