@@ -6,9 +6,10 @@
                     <div class="card-body">
                         <div class="card-header mb-3">Registration Form</div>
                         {{ form_start(form) }}
+                        <label for="inputEmail" class="sr-only">Email address</label>
                         <div class="form_group">
                             <div class="col-md-12 mb-3">
-                                {{ form_row(form.email, {'attr': {'class': 'form-control'}}) }}
+                                {{ form_row(form.email, {'attr': {'class': 'form-control', 'type': 'email', 'required' : 'autofocus'}}) }}
                             </div>
                         </div>
                         <div class="form_group">
