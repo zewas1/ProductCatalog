@@ -21,10 +21,14 @@ class RegistrationController extends AbstractController
      */
     private UserPasswordEncoderInterface $passwordEncoder;
 
+    /**
+     * @var RegistrationService
+     */
     private RegistrationService $registrationService;
 
     /**
      * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param RegistrationService $registrationService
      */
     public function __construct(UserPasswordEncoderInterface $passwordEncoder, RegistrationService $registrationService)
     {
@@ -34,6 +38,7 @@ class RegistrationController extends AbstractController
 
     /**
      * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     #[Route('/registration', name: 'app_register')]

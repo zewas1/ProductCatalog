@@ -8,9 +8,7 @@ use App\Entity\Product;
 use App\Entity\ProductCategory;
 use App\Form\ProductCategoryType;
 use App\Form\ProductType;
-use App\Repository\ProductCategoryRepository;
 use App\Repository\ProductRepository;
-use Doctrine\ORM\ORMException;
 use App\Service\ProductService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -21,10 +19,20 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ProductController extends AbstractController
 {
-
+    /**
+     * @var ProductRepository
+     */
     private ProductRepository $productRepository;
+
+    /**
+     * @var ProductService
+     */
     private ProductService $productService;
 
+    /**
+     * @param ProductRepository $productRepository
+     * @param ProductService $productService
+     */
     public function __construct
     (
         ProductRepository $productRepository,
