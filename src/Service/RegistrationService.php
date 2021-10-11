@@ -10,9 +10,21 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistrationService
 {
+
+    /**
+     * @var UserPasswordEncoderInterface
+     */
     private UserPasswordEncoderInterface $passwordEncoder;
+
+    /**
+     * @var EntityManagerInterface
+     */
     private EntityManagerInterface $entityManager;
 
+    /**
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct
     (
         UserPasswordEncoderInterface $passwordEncoder,

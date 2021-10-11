@@ -18,30 +18,23 @@ class ProductService
      * @var EntityManagerInterface
      */
     private EntityManagerInterface $entityManager;
+
+    /**
+     * @var ProductRepository
+     */
     private ProductRepository $productRepository;
-    private ProductCategoryRepository $categoryRepository;
 
     /**
      * @param EntityManagerInterface $entityManager
+     * @param ProductRepository $productRepository
      */
     public function __construct
     (
         EntityManagerInterface $entityManager,
         ProductRepository $productRepository,
-        ProductCategoryRepository $categoryRepository,
     ){
         $this->entityManager = $entityManager;
         $this->productRepository = $productRepository;
-        $this->categoryRepository = $categoryRepository;
-    }
-
-    /**
-     * @param $entity
-     */
-    public function save($entity)
-    {
-        $this->entityManager->persist($entity);
-        $this->entityManager->flush();
     }
 
     /**
@@ -61,6 +54,15 @@ class ProductService
         }
 
         return false;
+    }
+
+    /**
+     * @param $entity
+     */
+    public function save($entity)
+    {
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
     }
 
     /**
