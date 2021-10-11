@@ -27,9 +27,9 @@ class Product implements \JsonSerializable
      *
      * @Assert\NotBlank(message="Name must not be blank")
      *
-     * @var string|null
+     * @var string
      */
-    private ?string $name;
+    private string $name;
 
     /**
      * @ORM\ManyToOne(targetEntity=ProductCategory::class)
@@ -71,22 +71,20 @@ class Product implements \JsonSerializable
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
      * @param string $name
-     * @return $this
      */
-    public function setName(string $name): self
+    public function setName(string $name): void
     {
-        $this->name = $name;
 
-        return $this;
+        $this->name = $name;
     }
 
     /**
@@ -99,13 +97,10 @@ class Product implements \JsonSerializable
 
     /**
      * @param ProductCategory $productCategory
-     * @return $this
      */
-    public function setProductCategory(ProductCategory $productCategory): self
+    public function setProductCategory(ProductCategory $productCategory): void
     {
         $this->productCategory = $productCategory;
-
-        return $this;
     }
 
     /**
@@ -118,13 +113,10 @@ class Product implements \JsonSerializable
 
     /**
      * @param string|null $description
-     * @return $this
      */
-    public function setDescription(?string $description): self
+    public function setDescription(?string $description): void
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
