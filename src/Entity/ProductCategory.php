@@ -7,6 +7,7 @@ namespace App\Entity;
 use App\Repository\ProductCategoryRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass=ProductCategoryRepository::class)
@@ -14,14 +15,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 class ProductCategory
 {
     /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *
+     * @JMS\Type("int")
      */
     private int $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(type="string", length=255)
+     *
+     * @JMS\Type("string")
      *
      * @Assert\NotBlank (message="Category must not be empty")
      */

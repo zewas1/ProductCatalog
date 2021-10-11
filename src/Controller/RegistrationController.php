@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Service\RegistrationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,20 +21,22 @@ class RegistrationController extends AbstractController
      */
     private UserPasswordEncoderInterface $passwordEncoder;
 
+    private RegistrationService $registrationService;
+
     /**
      * @param UserPasswordEncoderInterface $passwordEncoder
      */
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder, RegistrationService $registrationService)
     {
         $this->passwordEncoder = $passwordEncoder;
+        $this->registrationService = $registrationService;
     }
 
     /**
-     * @Route("/registration", name="app_register")
-     *
      * @param Request $request
      * @return RedirectResponse|Response
      */
+    #[Route('/registration', name: 'app_register')]
     public function index(Request $request): RedirectResponse|Response
     {
         $user = new User();
@@ -41,12 +46,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
-            $user->setRoles(['ROLE_USER']);
-            
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($user);
-            $em->flush();
+            $this->registrationService->handleUserRegistration($user);
 
             return $this->redirectToRoute('app_login');
         }

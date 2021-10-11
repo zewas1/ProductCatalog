@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -16,12 +17,16 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    const ROLE_USER = 'ROLE_USER';
+
     /**
      * @var int
      *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     *
+     * @JMS\Type("int")
      */
     private int $id;
 
@@ -29,6 +34,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string
      *
      * @ORM\Column(type="string", length=180, unique=true)
+     *
+     * @JMS\Type("string")
      *
      * @Assert\Email (message = "must be a valid email address")
      */
@@ -38,6 +45,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var array
      *
      * @ORM\Column(type="json")
+     *
+     * @JMS\Type("array")
      */
     private array $roles = [];
 
@@ -45,6 +54,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string
      *
      * @ORM\Column(type="string")
+     *
+     * @JMS\Type("string")
      */
     private string $password;
 

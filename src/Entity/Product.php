@@ -7,58 +7,71 @@ namespace App\Entity;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Entity(repositoryClass=ProductRepository::class)
  */
-class Product implements \JsonSerializable
+class Product
 {
     /**
+     * @var int
+     *
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      *
-     * @var int
+     * @JMS\Type("int")
      */
     private int $id;
 
     /**
+     * @var string
+     *
      * @ORM\Column(name="name", type="string", length=255)
      *
      * @Assert\NotBlank(message="Name must not be blank")
      *
-     * @var string
+     * @JMS\Type("string")
      */
     private string $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity=ProductCategory::class)
+     * @var ProductCategory
+     *
+     * @ORM\ManyToOne(targetEntity=ProductCategory::class, fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      *
-     * @Assert\Valid()
+     * @JMS\Type("ProductCategory")
      *
-     * @var ProductCategory
+     * @Assert\Valid()
      */
     private ProductCategory $productCategory;
 
     /**
+     * @var float
+     *
      * @ORM\Column(name="price", type="decimal", precision=10, scale=2)
      *
-     * @Assert\NotBlank(message="Price must not be blank")
+     * @JMS\Type("float")
      *
-     * @var float
+     * @Assert\NotBlank(message="Price must not be blank")
      */
     private float $price;
 
     /**
+     * @var int
+     *
      * @ORM\Column(name="quantity", type="integer")
      *
-     * @var int
+     * @JMS\Type("int")
      */
     private int $quantity;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
+     *
+     * @JMS\Type("string")
      */
     private ?string $description;
 
@@ -151,21 +164,4 @@ class Product implements \JsonSerializable
         $this->quantity = $quantity;
     }
 
-    /**
-     * @return array
-     */
-    public function jsonSerialize(): array
-    {
-        return [
-            'id' => $this->id,
-            'product' => $this->name,
-            'productCategory' => [
-                'id' => $this->productCategory->getId(),
-                'name' => $this->productCategory->getName(),
-            ],
-            'price' => $this->price,
-            'quantity' => $this->quantity,
-            'description' => $this->description,
-        ];
-    }
 }
