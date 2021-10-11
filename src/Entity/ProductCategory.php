@@ -25,7 +25,7 @@ class ProductCategory
      *
      * @Assert\NotBlank (message="Category must not be empty")
      */
-    private ?string $name;
+    private string $name;
 
     public function getId(): ?int
     {
@@ -33,18 +33,17 @@ class ProductCategory
     }
 
     /**
-     * @return string|null
+     * @return string
      */
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * @param string|null $name
-     * @return void
+     * @param string $name
      */
-    public function setName(?string $name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
