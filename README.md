@@ -1,6 +1,8 @@
-In order to run this application a local web server with mysql database is needed. You can run it with XAMPP's apache and mysql.
+In order to run this application a local web server with mysql database and composer are needed. You can run it with XAMPP's apache and mysql.
 
 Download xampp: https://www.apachefriends.org/download.html PHP 8.0.11 for your operating system.
+
+Download and install composer: https://getcomposer.org/download/ 
 
 Start XAMPP's apache and mysql services via XAMPP control panel.
 
