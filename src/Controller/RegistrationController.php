@@ -8,41 +8,33 @@ use App\Entity\User;
 use App\Form\UserType;
 use App\Service\RegistrationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistrationController extends AbstractController
 {
-    /**
-     * @var UserPasswordEncoderInterface
-     */
-    private UserPasswordEncoderInterface $passwordEncoder;
-
     /**
      * @var RegistrationService
      */
     private RegistrationService $registrationService;
 
     /**
-     * @param UserPasswordEncoderInterface $passwordEncoder
      * @param RegistrationService $registrationService
      */
-    public function __construct(UserPasswordEncoderInterface $passwordEncoder, RegistrationService $registrationService)
+    public function __construct(RegistrationService $registrationService)
     {
-        $this->passwordEncoder = $passwordEncoder;
         $this->registrationService = $registrationService;
     }
 
     /**
      * @param Request $request
-     *
-     * @return RedirectResponse|Response
+     * @return Response
      */
-    #[Route('/registration', name: 'app_register')]
-    public function index(Request $request): RedirectResponse|Response
+    #[
+        Route('/registration', name: 'app_register')
+    ]
+    public function index(Request $request): Response
     {
         $user = new User();
 

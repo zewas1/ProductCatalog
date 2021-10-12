@@ -36,6 +36,9 @@ class ProductCategory
      */
     private string $name;
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
