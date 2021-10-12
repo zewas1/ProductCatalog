@@ -81,16 +81,4 @@ class ProductController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
-
-    /**
-     * @param int $id
-     * @return JsonResponse
-     */
-    #[Route('/api/items/{id}', methods: 'GET')]
-    public function showOneProduct(int $id): JsonResponse
-    {
-        $product = $this->productService->getProductById($id);
-
-        return $this->json($product);
-    }
 }

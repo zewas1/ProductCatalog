@@ -60,7 +60,6 @@ class ProductService
         if ($form->isSubmitted() && $form->isValid()) {
            $this->entityManager->persist($product);
            $this->entityManager->flush();
-
         }
 
         return $form;
