@@ -40,7 +40,7 @@ class RegistrationService
     public function handleUserRegistration(User $user): void
     {
         $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
-        $user->setRoles(['ROLE_USER']);
+        $user->setRoles([User::ROLE_USER]);
         $this->save($user);
     }
 

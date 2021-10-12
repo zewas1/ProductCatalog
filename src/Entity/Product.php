@@ -60,16 +60,16 @@ class Product
     private float $price;
 
     /**
-     * @var int
+     * @var int|null
      *
-     * @ORM\Column(name="quantity", type="integer")
+     * @ORM\Column(name="quantity", type="integer", nullable=true)
      *
      * @JMS\Type("int")
      */
-    private int $quantity;
+    private ?int $quantity;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      *
      * @JMS\Type("string")
      */
@@ -96,7 +96,6 @@ class Product
      */
     public function setName(string $name): void
     {
-
         $this->name = $name;
     }
 
@@ -149,17 +148,17 @@ class Product
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getQuantity(): int
+    public function getQuantity(): ?int
     {
         return $this->quantity;
     }
 
     /**
-     * @param int $quantity
+     * @param int|null $quantity
      */
-    public function setQuantity(int $quantity): void
+    public function setQuantity(?int $quantity): void
     {
         $this->quantity = $quantity;
     }
