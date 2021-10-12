@@ -12,7 +12,11 @@ Navigate to the root directory of the project (you can use cmd, gitbash, termina
 
 Install required dependencies with the following command: composer require symfony/runtime
 
-On XAMPP control panel click shell tye in the following command: db_user -u root password, when prompted for password type in : db_password
+On XAMPP control panel click shell tye in the following command: db_user -u root password
+
+When prompted for password type in : db_password
+
+Once database user is created you will need to perform a migration.
 
 Perform database migration from the root directory with the  following command: php bin/console doctrine:migrations:migrate
 
