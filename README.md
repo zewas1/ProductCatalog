@@ -12,13 +12,9 @@ Navigate to the root directory of the project (you can use cmd, gitbash, termina
 
 Install required dependencies with the following command: composer require symfony/runtime
 
-On XAMPP control panel click shell tye in the following command: mysqladmin  -u db_user password
+Via XAMPP's control panel either use shell or "Admin" next to mysql to create a new database user, which will be used to access the database (user: db_user , password: db_password @localhost), also create a new database called "catalog". You can find one example of how to do it with XAMPP's phpmyadmin here: http://www.cs.virginia.edu/~up3f/cs4750/supplement/DB-setup-xampp.html
 
-When prompted for password type in : db_password
-
-Once database user is created you will need to perform a migration.
-
-Perform database migration from the root directory with the  following command: php bin/console doctrine:migrations:migrate
+Perform database migration from the root directory (xampp/htdocs/ProductCatalog) with the  following command: php bin/console doctrine:migrations:migrate
 
 Open your web browser to check the web application localhost/ProductCatalog/public/index.php
 
