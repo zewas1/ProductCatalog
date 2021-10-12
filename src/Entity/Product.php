@@ -162,5 +162,4 @@ class Product
     {
         $this->quantity = $quantity;
     }
-
 }

@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Entity\User;
+use App\Modifier\User\UserModifier;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class RegistrationService
 {
-
     /**
-     * @var UserPasswordEncoderInterface
+     * @var UserPasswordHasherInterface
      */
-    private UserPasswordEncoderInterface $passwordEncoder;
+    private UserPasswordHasherInterface $passwordEncoder;
 
     /**
      * @var EntityManagerInterface
@@ -22,16 +22,24 @@ class RegistrationService
     private EntityManagerInterface $entityManager;
 
     /**
-     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @var UserModifier
+     */
+    private UserModifier $userModifier;
+
+    /**
+     * @param UserPasswordHasherInterface $passwordEncoder
      * @param EntityManagerInterface $entityManager
+     * @param UserModifier $userModifier
      */
     public function __construct
     (
-        UserPasswordEncoderInterface $passwordEncoder,
-        EntityManagerInterface $entityManager
+        UserPasswordHasherInterface $passwordEncoder,
+        EntityManagerInterface $entityManager,
+        UserModifier $userModifier
     ) {
         $this->passwordEncoder = $passwordEncoder;
         $this->entityManager = $entityManager;
+        $this->userModifier = $userModifier;
     }
 
     /**
@@ -39,17 +47,9 @@ class RegistrationService
      */
     public function handleUserRegistration(User $user): void
     {
-        $user->setPassword($this->passwordEncoder->encodePassword($user, $user->getPassword()));
-        $user->setRoles([User::ROLE_USER]);
-        $this->save($user);
-    }
-
-    /**
-     * @param User $user
-     */
-    public function save(User $user)
-    {
-        $this->entityManager->persist($user);
+        $newPassword = $this->passwordEncoder->hashPassword($user, $user->getPassword());
+        $modifiedUser = $this->userModifier->modify($user, $newPassword, User::DEFAULT_USER_ROLES);
+        $this->entityManager->persist($modifiedUser);
         $this->entityManager->flush();
     }
 }

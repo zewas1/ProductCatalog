@@ -20,7 +20,6 @@ use Symfony\Component\Security\Core\User\PasswordUpgraderInterface;
  */
 class UserRepository extends ServiceEntityRepository implements PasswordUpgraderInterface
 {
-
     /**
      * @param ManagerRegistry $registry
      */

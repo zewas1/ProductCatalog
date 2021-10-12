@@ -4,15 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Product;
-use App\Entity\ProductCategory;
-use App\Form\ProductCategoryType;
-use App\Form\ProductType;
-use App\Repository\ProductRepository;
 use App\Service\ProductService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,32 +14,24 @@ use Symfony\Component\HttpFoundation\Request;
 class ProductController extends AbstractController
 {
     /**
-     * @var ProductRepository
-     */
-    private ProductRepository $productRepository;
-
-    /**
      * @var ProductService
      */
     private ProductService $productService;
 
     /**
-     * @param ProductRepository $productRepository
      * @param ProductService $productService
      */
-    public function __construct
-    (
-        ProductRepository $productRepository,
-        ProductService    $productService,
-    ) {
-        $this->productRepository = $productRepository;
+    public function __construct(ProductService $productService)
+    {
         $this->productService = $productService;
     }
 
     /**
      * @return Response
      */
-    #[Route('/products', name: 'app_product_list', methods: 'GET')]
+    #[
+        Route('/products', name: 'app_product_list', methods: 'GET')
+    ]
     public function listProducts(): Response
     {
         $products = $this->productService->listProducts();
@@ -56,33 +42,17 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @param int $id
-     *
-     * @return JsonResponse
-     */
-    #[Route('/api/items/{id}', methods: 'GET')]
-    public function showOneProduct(int $id): JsonResponse
-    {
-        $product = $this->productRepository->find($id);
-
-        return $this->json($product);
-    }
-
-    /**
      * @param Request $request
-     *
-     * @return RedirectResponse|Response
+     * @return Response
      */
-    #[Route('/products/create', name: 'app_product')]
-    public function createProduct(Request $request): RedirectResponse|Response
+    #[
+        Route('/products/create', name: 'app_product')
+    ]
+    public function createProduct(Request $request): Response
     {
-        $product = new Product();
+        $form = $this->productService->handleProduct($request);
 
-        $form = $this->createForm(ProductType::class, $product);
-
-        $handler = $this->productService->handleProductForm($form, $request, $product);
-
-        if ($handler) {
+        if ($form->isSubmitted() && $form->isValid()) {
             return $this->redirectToRoute('app_product_list');
         }
 
@@ -94,19 +64,16 @@ class ProductController extends AbstractController
 
     /**
      * @param Request $request
-     *
-     * @return RedirectResponse|Response
+     * @return Response
      */
-    #[Route('/products/category', name: 'app_product_category')]
-    public function createProductCategory(Request $request): RedirectResponse|Response
+    #[
+        Route('/products/category', name: 'app_product_category')
+    ]
+    public function createProductCategory(Request $request): Response
     {
-        $productCategory = new ProductCategory();
+        $form = $this->productService->handleProductCategory($request);
 
-        $form = $this->createForm(ProductCategoryType::class, $productCategory);
-
-        $handler = $this->productService->handleProductForm($form, $request, $productCategory);
-
-        if ($handler) {
+        if ($form->isSubmitted() && $form->isValid()) {
             return $this->redirectToRoute('app_product_list');
         }
 
@@ -115,4 +82,15 @@ class ProductController extends AbstractController
         ]);
     }
 
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
+    #[Route('/api/items/{id}', methods: 'GET')]
+    public function showOneProduct(int $id): JsonResponse
+    {
+        $product = $this->productService->getProductById($id);
+
+        return $this->json($product);
+    }
 }

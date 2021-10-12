@@ -16,7 +16,6 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ProductCategoryRepository extends ServiceEntityRepository
 {
-
     /**
      * @param ManagerRegistry $registry
      */
