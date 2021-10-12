@@ -8,6 +8,12 @@ use App\Entity\User;
 
 class UserModifier
 {
+    /**
+     * @param User $user
+     * @param string $newPassword
+     * @param array $roles
+     * @return User
+     */
     public function modify(User $user, string $newPassword, array $roles): User
     {
         $user->setPassword($newPassword);
