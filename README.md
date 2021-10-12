@@ -10,6 +10,8 @@ Clone the git project into xampp/htdocs folder for e.g. xampp/htdocs/ProductCata
 
 Navigate to the root directory of the project (you can use cmd, gitbash, terminal) for e.g. cd xampp/htdocs/ProductCatalog
 
+Install required dependencies with the following command: composer require symfony/runtime
+
 Perform database migration from the root directory with the  following command: php bin/console doctrine:migrations:migrate
 
 Open your web browser to check the web application localhost/ProductCatalog/public/index.php
