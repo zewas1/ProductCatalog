@@ -12,6 +12,8 @@ Navigate to the root directory of the project (you can use cmd, gitbash, termina
 
 Install required dependencies with the following command: composer require symfony/runtime
 
+On XAMPP control panel click shell tye in the following command: db_user -u root password, when prompted for password type in : db_password
+
 Perform database migration from the root directory with the  following command: php bin/console doctrine:migrations:migrate
 
 Open your web browser to check the web application localhost/ProductCatalog/public/index.php
