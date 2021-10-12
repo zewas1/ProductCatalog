@@ -1,6 +1,6 @@
 In order to run this application a local web server with mysql database is needed. You can run it with XAMP's apache and mysql.
 
-Prior to testing the application, perform database migration with the following command:
+Prior to testing the application, perform database migration from the root directoyy using the following command:
 php bin/console doctrine:migrations:migrate
 
 Before accessing the main functionalities of the application, register a new user (data will only be saved on your local database).
