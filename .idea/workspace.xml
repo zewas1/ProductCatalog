@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="399e85d1-6aef-4ff7-9791-02f973d9cb61" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Controller/Api/ProductApiController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Modifier/User/UserModifier.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Modifier/User/UserModifier.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Service/ProductService.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Service/ProductService.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.env" beforeDir="false" afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/security/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/security/login.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,6 +192,7 @@
       <workItem from="1634030703057" duration="1717000" />
       <workItem from="1634032446497" duration="7863000" />
       <workItem from="1634042252564" duration="851000" />
+      <workItem from="1634043920774" duration="305000" />
     </task>
     <task id="LOCAL-00001" summary="controller rework, service update, main migration">
       <created>1634041383589</created>
